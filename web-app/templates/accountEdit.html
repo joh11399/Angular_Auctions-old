@@ -1,0 +1,123 @@
+<div ng-controller="accountEditController">
+
+    <!--
+
+
+
+
+$pristine to get around encryption issues  ....?
+
+
+
+
+from Calvo's slides.....
+
+    <form name="userForm" novalidate ng-submit="addUser(newUser)">
+      <div>
+        <input name="userName" required ng-model="newUser.name" placeholder="Name">
+      </div>
+      <div>
+        <input name="userEmail" type="email" ng-model="newUser.email" placeholder="Email">
+      </div>
+      <div>
+        <input type="checkbox" required> I agree to the terms and conditions
+      </div>
+      <button type="submit" ng-disabled="userForm.$invalid">OK</button>
+    </form>
+
+
+
+
+
+Example Styles
+form .ng-invalid.ng-dirty { background-color: lightpink; }
+form .ng-valid.ng-dirty { background-color: lightgreen; }
+span.summary.ng-invalid { color: red; font-weight: bold; }
+span.summary.ng-valid { color: green; }
+
+
+
+
+Validation Message Examples
+Name:
+<input type="text" ng-model="user.name" name="uName" required="" />
+<br />
+<div ng-show="form.$submitted || form.uName.$touched">
+  <div ng-show="form.uName.$error.required">Tell us your name.</div>
+</div>
+
+E-mail:
+<input type="email" ng-model="user.email" name="uEmail" required="" />
+<br />
+<div ng-show="form.$submitted || form.uEmail.$touched">
+  <span ng-show="form.uEmail.$error.required">Tell us your email.</span>
+  <span ng-show="form.uEmail.$error.email">This is not a valid email.</span>
+</div>
+
+
+
+    $scope.passwordKeyup = function(){
+
+        console.log($scope.accountForm.accountPassword.$invalid);
+
+        var pw = $scope.newAccount.password;
+
+        var pwMsg = '';
+
+        if(pw.length < 8 || pw.length > 16){
+            pwMsg = '8-16 characters';
+        }
+
+        if(!pw.match(/[a-z]/i)){
+            if(pwMsg!=''){ pwMsg+=', '; }
+            pwMsg += 'contains a letter'
+        }
+
+        if(!pw.match(/\d+/g)){
+            if(pwMsg!=''){ pwMsg+=', '; }
+            pwMsg += 'contains a number'
+        }
+
+        if(pw==''){
+            pwMsg='password required';
+        }
+
+        pwMsg = pwMsg.replace('contains a letter, contains a number','contains a letter and a number');
+
+        $scope.accountForm.accountPassword.$invalid = (pwMsg != '' || pw == '');
+
+        $scope.passwordStrength = pwMsg;
+
+        console.log($scope.accountForm.accountPassword.$invalid);
+    };
+
+    -->
+    <br>
+    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+    <div ng-form="accountForm">
+    <table><tr><td style="width: 150px;">Username: </td><td><input name="accountUsername" type="text" ng-model="newAccount.username" required></td></tr>
+        <tr><td>Email: </td><td><input name="accountEmail" type="email" ng-model="newAccount.email" required></td></tr>
+        <tr><td>Name: </td><td><input name="accountName" type="text" ng-model="newAccount.name" required></td>
+        <tr><td>Password: </td><td><input name="accountPassword" type="password" ng-model="newAccount.password" ng-click="passwordClick();" ng-minlength="8" ng-maxlength="16" ng-pattern="/(?:[A-Za-z].*?\d|\d.*?[A-Za-z])/" required>
+            <div style="display: inline-block; margin-left: 10px; width: 340px; color: #f22;">
+                <img id="accountPasswordCheckMark" ng-show="accountForm.accountPassword.$dirty && !accountForm.accountPassword.$invalid" src="http://www.clipartbest.com/cliparts/Bdi/r6x/Bdir6x6c9.png" style="height: 15px;" />
+                <span id="accountPasswordLength" class="error" ng-show="accountForm.accountPassword.$dirty && (accountForm.accountPassword.$error.minlength || accountForm.accountPassword.$error.maxlength)" style="margin-right: 10px;">8-16 characters</span>
+                <span id="accountPasswordNumberLetter" class="error" ng-show="accountForm.accountPassword.$dirty && accountForm.accountPassword.$error.pattern">contains a number and a letter</span>
+            </div>
+        </td></tr>
+
+        <tr><td>Address Street: </td><td><input name="accountAddressStreet" type="text" ng-model="newAccount.addressStreet" required></td></tr>
+        <tr><td>Address City: </td><td><input name="accountAddressCity" type="text" ng-model="newAccount.addressCity" required></td>
+        <tr><td>Address State: </td><td><input name="accountAddressState" type="text" ng-model="newAccount.addressState" typeahead="state for state in states | filter:$viewValue | limitTo:8" required></td></tr>
+        <tr><td>Address Zip: </td><td><input name="accountAddressZip" type="text" ng-model="newAccount.addressZip" required></td></tr>
+    </table>
+    </div>
+    <a href="javascript:history.back();" class="btn btn-default" style="margin-right: 6px;">Close</a>
+    <button id="accountDeleteBtn" class="btn btn-default" style="margin-right: 6px;" ng-click="deleteClick()">Delete</button>
+
+<!--
+the ng-disabled directive is not using accountForm.$invalid because an invalid, pristine password is acceptable
+  ..if the user does not change the encrypted, 60 character password  the form can still be submitted
+-->
+    <button id="accountEditSubmitBtn" class="btn btn-primary" ng-disabled="accountForm.accountUsername.$invalid || accountForm.accountEmail.$invalid || accountForm.accountName.$invalid || (accountForm.accountPassword.$dirty && accountForm.accountPassword.$invalid)" ng-click="save()">Save</button>
+</div>

@@ -1,0 +1,25 @@
+{
+  "name": "MSSE_Auctions",
+  "version": "0.0.0",
+  "description": "MSSE Auction Assignment #3",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/joh11399/MSSE_Auctions"
+  },
+  "author": "Dan Johnson",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/joh11399/MSSE_Auctions/issues"
+  },
+  "homepage": "https://github.com/joh11399/MSSE_Auctions",
+  "dependencies": {
+    "bower": "~1.4.1"
+  }
+}

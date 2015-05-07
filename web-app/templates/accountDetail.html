@@ -1,0 +1,17 @@
+<div ng-controller="accountDetailController">
+    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+    <br>
+    <table><tr><td style="width: 150px;">Username: </td><td><label id="accountDetailUsername">{{account.username}}</label></td></tr>
+        <tr><td>Email: </td><td><label id="accountDetailEmail">{{account.email}}</label></td></tr>
+        <tr><td>Name: </td><td><label>{{account.name}}</label></td>
+        <tr><td>Address Street: </td><td><label>{{account.addressStreet}}</label></td></tr>
+        <tr><td>Address City: </td><td><label>{{account.addressCity}}</label></td>
+        <tr><td>Address State: </td><td><label>{{account.addressState}}</label></td></tr>
+        <tr><td>Address Zip: </td><td><label>{{account.addressZip}}</label></td></tr>
+        <tr><td>Date Created: </td><td><label id="accountDetailDateCreated">{{account.dateCreated | date}}</label></td></tr>
+        <tr><td>Date Updated: </td><td><label id="accountDetailLastUpdated">{{account.lastUpdated | date}}</label></td></tr>
+    </table>
+
+    <a href="javascript:history.back();" class="btn btn-default" style="margin-right: 6px;">Close</a>
+    <a id="accountDetailEditBtn" href="#/accountEdit/{{account.id}}" class="btn btn-default" style="margin-right: 6px;">Edit Account</a>
+</div>

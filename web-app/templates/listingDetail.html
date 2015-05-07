@@ -1,0 +1,28 @@
+<div ng-controller="listingDetailController">
+    <br>
+    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+    <table>
+        <tr><td style="width: 150px;">Name: </td><td><label id="listingName">{{listing.name}}</label></td></tr>
+
+        <tr><td>Description: </td><td>{{listing.description}}</td></tr>
+
+        <tr><td>Time Remaining: </td><td>{{listing.timeRemaining}}</td></tr>
+
+        <tr><td>Highest Bidder: </td><td>{{listing.highestBidStr}}</td></tr>
+
+        <tr><td>Start Date: </td><td>{{listing.startDate}}</td></tr>
+
+        <tr><td>Days: </td><td>{{listing.days}}</td></tr>
+
+        <tr><td>Starting Price: </td><td>{{listing.startingPrice | currency}}</td></tr>
+
+        <tr><td>Deliver Option: </td><td><label id="listingDeliverOption">{{listing.deliverOption}}</label></td></tr>
+    </table>
+    <button class="btn btn-default" ng-click="createBid(listing.id)" ng-show="canBid" id="listingBidBtn">Bid</button>
+    <button class="btn btn-default" ng-click="createReview(listing.id)" ng-show="canReview" id="listingReviewBtn">Review</button>
+
+    <br><br><br>
+
+    <a href="javascript:history.back();" class="btn btn-default">Close</a>
+    <a id="listingEditBtn" href="#/listingEdit/{{listing.id}}" class="btn btn-default" ng-show="listing.timeRemaining != 'completed'">Edit</a>
+</div>

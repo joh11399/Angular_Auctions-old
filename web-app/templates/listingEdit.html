@@ -1,0 +1,34 @@
+<div ng-controller="listingEditController">
+    <br>
+    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+    <div ng-form="listingForm">
+    <table>
+        <tr><td style="width: 150px;">Name: </td><td><input id="listingName" type="text" ng-model="newListing.name" required></td></tr>
+        <tr><td>Description: </td><td><input id="listingDescription" type="text" ng-model="newListing.description" required></td></tr>
+
+        <tr><td>Start Date: </td><td>
+            <span class="input-group" style="width: 183px; padding-top: 25px;">
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+            <input  id="listingStartDate" type="text" class="form-control" datepicker-popup="MM/dd/yyyy" ng-model="dt" is-open="opened" min-date="minDate" max-date="'2016-01-01'" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+            </span>
+            <span style="width: 100px;">
+                <timepicker id="listingStartTime" ng-model="mytime" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian" style="width:200px"></timepicker>
+            </span>
+        </td></tr>
+
+        <tr><td>Days: </td><td><input id="listingDays" type="text" ng-model="newListing.days" required></td></tr>
+
+        <tr><td>Starting Price: </td><td><input id="listingStartingPrice" type="text" ng-model="newListing.startingPrice" required></td></tr>
+
+        <tr><td>Deliver Option: </td><td><select id="listingDeliverOption" ng-model="newListing.deliverOption" style="width: 183px; height: 28px;">
+            <option>US Only</option><option>Worldwide</option><option>Pick Up Only</option>
+        </select></td></tr>
+    </table>
+    </div>
+
+    <a href="javascript:history.back();" class="btn btn-default">Close</a>
+    <button id="listingDeleteBtn" class="btn btn-default" ng-click="deleteClick()">Delete</button>
+    <button id="listingSaveBtn" ng-click="save()" class="btn btn-primary" ng-disabled="listingForm.$invalid">Save</button>
+</div>

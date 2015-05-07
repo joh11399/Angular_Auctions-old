@@ -1,0 +1,16 @@
+<div ng-controller="accountsController">
+    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+
+    <table id="accountsTable">
+        <thead>
+        <tr>
+            <th>Username</th><th>Email</th><th>Name</th>
+        </tr>
+        </thead>
+        <tr ng-repeat="account in accounts">
+            <td>{{account.username}}</td>
+            <td>{{account.email}}</td>
+            <td>{{account.name}}</td>
+        </tr>
+    </table>
+</div>

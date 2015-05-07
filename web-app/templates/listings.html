@@ -1,0 +1,26 @@
+<div ng-controller="listingsController">
+
+    <input id="listingsSearchTxt" type="text" ng-model="description" ng-keyup="getListingsKeyup()" placeholder="Search Description" />
+    <input type="checkbox" ng-model="includeCompleted" ng-change="getListings()" style="margin-left: 25px; cursor: pointer;" /><span id="listingsIncludeCompletedChk" ng-click="includeCompleted = !includeCompleted; getListings();" style="cursor: pointer;">Include Completed Listings</span>
+    <a id="createListingBtn" href="#/listingCreate" class="btn btn-default" style="margin-left: 25px;">Create Listing</a>
+
+    <table id="listingsTable">
+        <thead>
+        <tr>
+            <th></th><th>Name</th><th>Highest Bid</th><th>Time Remaining</th><th>Description</th><th>Seller ID</th>
+        </tr>
+        </thead>
+        <tr ng-repeat="listing in listings">
+            <td style="height: 50px;">
+                <button class="btn btn-default" ng-click="createBid(listing.id)" ng-show="listing.canBid" id="listingBidBtn{{listing.id}}">Bid</button>
+                <button class="btn btn-default" ng-click="createReview(listing.id)" ng-show="listing.canReview" id="listingReviewBtn{{listing.id}}">Review</button>
+            </td>
+            <td><a id="listingName{{listing.id}}" href="#/listing/{{listing.id}}">{{listing.name}}</a></td>
+            <td><label id="listingHighestBidStr{{listing.id}}">{{listing.highestBidStr}}</label></td>
+            <td>{{listing.timeRemaining}}</td>
+            <td>{{listing.description}}</td>
+            <td>{{listing.seller.id}}</td>
+        </tr>
+    </table>
+    <pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="getListings()"></pagination>
+</div>

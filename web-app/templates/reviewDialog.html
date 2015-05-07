@@ -1,0 +1,49 @@
+<!--
+    Listing listing
+    Account reviewer
+    Account reviewee
+    String reviewOf
+    int rating
+    String thumbs
+    String description
+
+    Date dateCreated
+    Date lastUpdated
+-->
+
+<div>
+    <div class="modal-header">
+        <h3 class="modal-title">
+            Review
+        </h3>
+    </div>
+
+    <div class="modal-body">
+
+        Review of: <label id="reviewOfLbl">{{editReview.reviewOf}}</label>
+
+        <br><br>
+
+        <div class="btn-group">
+            <label id="reviewThumbsUp" class="btn btn-default glyphicon glyphicon-thumbs-up" ng-model="editReview.thumbs" btn-radio="'up'" style="margin-right: 0;"></label>
+            <label id="reviewThumbsDown" class="btn btn-default glyphicon glyphicon-thumbs-down" ng-model="editReview.thumbs" btn-radio="'down'"></label>
+            Thumbs {{editReview.thumbs}}
+        </div>
+
+        <br><br>
+
+        <rating ng-model="editReview.rating" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" style="outline: none;"></rating>
+        <span style="margin-left: 10px;">{{overStar || editReview.rating}} star{{(overStar || editReview.rating)>1?'s':''}}</span>
+
+        <br><br>
+
+        <div ng-form="reviewForm">
+            <input type="text" name="reviewDescription" ng-model="editReview.description" placeholder="Description" style="width: 96%;" ng-maxlength="100" />
+            <span class="error" ng-show="reviewForm.reviewDescription.$error.maxlength" style="margin-right: 10px;">max of 100 characters</span>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button id="reviewCancelBtn" class="btn btn-default" ng-click="cancel()">Cancel</button>
+        <button id="reviewSubmitBtn" class="btn btn-primary" ng-click="ok()" ng-disabled="reviewForm.reviewDescription.$error.maxlength">Submit Review</button>
+    </div>
+</div>

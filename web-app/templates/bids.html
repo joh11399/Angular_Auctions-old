@@ -1,0 +1,17 @@
+<div ng-controller="bidsController">
+    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+
+    <table>
+        <thead>
+        <tr>
+            <th></th><th>Amount</th><th>Bid Id</th><th>Bidder Id</th><th>Listing Id</th>
+        </tr>
+        </thead>
+        <tr ng-repeat="bid in bids">
+            <td> <button class="btn btn-default" ng-click="editBidClick(bid.id)">Edit Bid</button> </td>
+            <td>${{bid.amount}}</td>
+            <td><a href="#/bid/{{bid.id}}" style="text-decoration: underline; cursor: pointer;">{{bid.id}}</a></td>
+            <td>{{bid.bidder.id}}</td><td>{{bid.listing.id}}</td>
+        </tr>
+    </table>
+</div>

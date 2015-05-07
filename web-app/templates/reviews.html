@@ -1,0 +1,22 @@
+<div ng-controller="reviewsController">
+    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Review Id</th><th>Listing Id</th><th>Reviewer Id</th><th>Reviewee Id</th><th>Thumbs</th><th>Rating</th><th>Description</th>
+        </tr>
+        </thead>
+        <tr ng-repeat="review in reviews">
+            <td><label ng-click="editReview(review.id);" style="cursor: pointer;">{{review.id}}</label></td>
+            <td>{{review.listing.id}}</td>
+            <td>{{review.reviewer.id}}</td>
+            <td>{{review.reviewee.id}}</td>
+            <td>{{review.thumbs}}</td>
+            <td>{{review.rating}}</td>
+            <td>{{review.description}}</td>
+            <!--<td><a href="#/bid/{{bid.id}}" style="text-decoration: underline; cursor: pointer;">{{bid.id}}</a></td>
+            <td>{{bid.bidder.id}}</td><td>{{bid.listing.id}}</td>-->
+        </tr>
+    </table>
+</div>

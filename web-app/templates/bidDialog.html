@@ -1,0 +1,14 @@
+<div ng-form="bidForm">
+    <div class="modal-header">
+        <h3 class="modal-title">Place Bid</h3>
+    </div>
+
+    <div class="modal-body">
+        $<input id="bidAmount" type="text" ng-model="editBid.amount" ng-keyup="amountKeyup()" style="width: 70px;" required />
+        <span id="bidErrorLbl" class="error" ng-show="belowMinimum" style="margin-left: 10px; color: #f22;">The minimum bid is ${{minimumBid}}</span>
+    </div>
+    <div class="modal-footer">
+        <button id="bidCancelBtn" class="btn btn-default" ng-click="cancel()">Cancel</button>
+        <button id="bidSubmitBtn" class="btn btn-primary" ng-click="ok()" ng-disabled="bidForm.$invalid">Place Bid</button>
+    </div>
+</div>
